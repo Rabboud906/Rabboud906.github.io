@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rawad Abboud Portfolio</title>
+<meta name="description" content="Rawad Abboud is a UCLA Computer Science student building AI systems, from computer vision to language models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Layout: a blaugrana striped hero, then ruled rows with a blue/garnet/gold tab on each rule.
+     Palette: Barca blue, garnet, gold on a blue-tinted neutral. */
+  :root {
+    --bg: #F4F6FB;
+    --bg-2: #E6EBF6;
+    --card: #FFFFFF;
+    --ink: #0A1633;
+    --muted: #4A5675;
+    --hair: #C5CEE2;
+    --blue: #004D98;
+    --garnet: #A50044;
+    --gold: #EDBB00;
+    --gold-ink: #0A1633;
+    --link: #004D98;
+    --on-blue: #FFFFFF;
+    --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #08102A; --bg-2: #101B3F; --card: #0E1838; --ink: #EEF1FA; --muted: #A5B0D0;
+      --hair: #25335F; --blue: #6FA6F2; --garnet: #FF5C98; --gold: #F5C400; --gold-ink: #0A1633;
+      --link: #8DBAFF; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #08102A; --bg-2: #101B3F; --card: #0E1838; --ink: #EEF1FA; --muted: #A5B0D0;
+    --hair: #25335F; --blue: #6FA6F2; --garnet: #FF5C98; --gold: #F5C400; --gold-ink: #0A1633;
+    --link: #8DBAFF; color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; color: var(--garnet); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; color: #fff; isolation: isolate;
+    background:
+      linear-gradient(180deg, rgba(5,12,38,.15) 0%, rgba(5,12,38,.62) 100%),
+      repeating-linear-gradient(90deg, #004D98 0 56px, #A50044 56px 112px);
+    border-bottom: 6px solid var(--gold);
+  }
+  .hero .wrap { padding-block: 56px 44px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; background: var(--gold); color: #0A1633; padding: 6px 12px; margin: 0 0 22px; }
+  .hero h1 {
+    font-family: var(--display); font-stretch: 75%; font-weight: 900; text-transform: uppercase;
+    font-size: clamp(54px, 12.5vw, 148px); line-height: .88; letter-spacing: -.01em; margin: 0 0 26px;
+    text-shadow: 0 3px 0 rgba(5,12,38,.35); text-wrap: balance;
+  }
+  .hero h1 span { color: var(--gold); }
+  .statement { font-size: clamp(20px, 3vw, 30px); line-height: 1.3; font-weight: 500; max-width: 26em; margin: 0 0 34px; text-wrap: pretty; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { font: 600 16px/1 var(--body); padding: 14px 20px; border: 2px solid #fff; background: transparent; color: #fff; cursor: pointer; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+  .btn:hover { background: #fff; color: #0A1633; }
+  .btn.primary { background: var(--gold); border-color: var(--gold); color: #0A1633; }
+  .btn.primary:hover { background: #fff; border-color: #fff; }
+  .mail { font-weight: 500; color: #fff; user-select: all; }
+
+  /* Title block */
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin: -1px 0 0; background: var(--card); border: 2px solid var(--blue); border-top: 0; transform: translateY(0); }
+  .facts > div { padding: 14px 18px 16px; border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+  .facts > div:nth-child(3n) { border-right: 0; }
+  .facts > div:nth-child(n+4) { border-bottom: 0; }
+  .facts dt { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--garnet); margin: 0 0 3px; }
+  .facts dd { margin: 0; font-weight: 500; line-height: 1.4; }
+  .facts .links { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+
+  /* ---------- Rows ---------- */
+  .row { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 20px 56px; padding: 48px 0; border-top: 2px solid var(--ink); position: relative; }
+  .row::before { content: ""; position: absolute; top: -2px; left: 0; width: 132px; height: 8px; background: linear-gradient(90deg, var(--blue) 0 44px, var(--garnet) 44px 88px, var(--gold) 88px 132px); }
+  .row h2 { font-family: var(--display); font-stretch: 75%; font-weight: 900; text-transform: uppercase; font-size: 31px; line-height: 1.02; margin: 0 0 10px; color: var(--blue); text-wrap: balance; }
+  .meta { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+  .row-main { min-width: 0; }
+  .row-main p { max-width: 62ch; margin: 0 0 16px; }
+  .row-main h3 { font-family: var(--display); font-stretch: 75%; font-weight: 800; font-size: 28px; line-height: 1.08; margin: 0 0 12px; text-wrap: balance; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; background: var(--garnet); color: #fff; margin: 0 0 10px; }
+  .tag.live { background: var(--gold); color: #0A1633; }
+
+  .spec { margin: 28px 0 0; border-top: 2px solid var(--blue); }
+  .spec > div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--hair); }
+  .spec dt { color: var(--muted); font-size: 15px; }
+  .spec dd { margin: 0; }
+
+  /* Diagrams */
+  figure { margin: 30px 0 0; }
+  .scroll { overflow-x: auto; border: 1px solid var(--hair); background: var(--bg-2); padding: 14px; }
+  .scroll svg { display: block; min-width: 760px; width: 100%; height: auto; }
+  figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); }
+  .box { fill: var(--card); stroke: var(--blue); stroke-width: 1.8; }
+  .box-out { fill: var(--card); stroke: var(--garnet); stroke-width: 3; }
+  .t { fill: var(--ink); font-family: var(--body); font-size: 13.5px; font-weight: 600; }
+  .t-sub { fill: var(--muted); font-family: var(--body); font-size: 12px; }
+  .t-out { fill: var(--garnet); font-family: var(--display); font-stretch: 75%; font-weight: 900; font-size: 17px; }
+  .t-note { fill: var(--muted); font-family: var(--body); font-size: 12.5px; }
+  .arrow { stroke: var(--gold); stroke-width: 2.4; fill: none; }
+  .dash { stroke: var(--muted); stroke-width: 1.3; stroke-dasharray: 5 4; fill: none; }
+  .head { fill: var(--gold); }
+  .step-n { fill: var(--blue); }
+  .step-t { fill: #fff; font-family: var(--display); font-weight: 800; font-size: 12px; }
+
+  /* Mosaic */
+  .mosaic { display: block; width: 100%; height: auto; max-width: 100%; border: 2px solid var(--ink); image-rendering: pixelated; margin: 0 0 18px; background: var(--blue); }
+
+  /* Project cards */
+  .project { padding: 24px 0; border-top: 1px solid var(--hair); }
+  .project:first-child { border-top: 0; padding-top: 0; }
+  .project header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; align-items: baseline; }
+  .project h3 { margin-bottom: 4px; }
+  .project .stack { margin: 0 0 8px; color: var(--muted); font-size: 15px; }
+  .project p:last-child { margin-bottom: 0; }
+
+  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .tile { display: block; background: var(--card); border: 1px solid var(--hair); border-top: 6px solid var(--blue); padding: 16px 18px 18px; text-decoration: none; color: var(--ink); }
+  .tile:nth-child(2) { border-top-color: var(--garnet); }
+  .tile:nth-child(3) { border-top-color: var(--gold); }
+  .tile b { display: block; font-family: var(--display); font-stretch: 75%; font-weight: 800; font-size: 24px; line-height: 1.1; margin-bottom: 6px; color: var(--ink); }
+  .tile span { color: var(--muted); font-size: 15px; line-height: 1.45; display: block; }
+  .tile:hover { border-color: var(--garnet); }
+  @media (max-width: 520px) { .tiles { grid-template-columns: minmax(0, 1fr); } }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px; }
+  .cols > div { min-width: 0; }
+  .cols h3 { font-size: 22px; margin-bottom: 8px; color: var(--garnet); }
+  .cols p, .cols ul { max-width: none; margin: 0 0 8px; }
+  .cols ul { padding-left: 20px; }
+  .cols li { margin-bottom: 8px; }
+  .cols li:last-child { margin-bottom: 0; }
+
+  /* Contact band */
+  .contact { background: linear-gradient(180deg, rgba(5,12,38,.1), rgba(5,12,38,.55)), repeating-linear-gradient(90deg, #004D98 0 56px, #A50044 56px 112px); color: #fff; border-top: 6px solid var(--gold); }
+  .contact .wrap { padding-block: 52px; }
+  .contact-big { font-family: var(--display); font-stretch: 75%; font-weight: 900; text-transform: uppercase; font-size: clamp(32px, 5.4vw, 60px); line-height: 1; margin: 0 0 22px; max-width: 16em; text-wrap: balance; }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 10px 26px; font-weight: 500; font-size: 18px; align-items: center; }
+  .contact a:not(.btn) { color: #fff; }
+  footer .wrap { padding-block: 18px; color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 820px) {
+    .facts { grid-template-columns: 1fr 1fr; }
+    .facts > div:nth-child(3n) { border-right: 1px solid var(--hair); }
+    .facts > div:nth-child(2n) { border-right: 0; }
+    .facts > div:nth-child(n+4) { border-bottom: 1px solid var(--hair); }
+    .facts > div:nth-child(n+5) { border-bottom: 0; }
+    .row { grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 38px 0; }
+    .cols { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    .hero .wrap { padding-block: 40px 32px; }
+    .facts { grid-template-columns: minmax(0, 1fr); }
+    .facts > div, .facts > div:nth-child(3n), .facts > div:nth-child(2n) { border-right: 0; border-bottom: 1px solid var(--hair); }
+    .facts > div:last-child { border-bottom: 0; }
+    .spec > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn { transition: background .15s, color .15s; }
+  }
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">UCLA Computer Science · Class of 2028</p>
+    <h1>Rawad <span>Abboud</span></h1>
+    <p class="statement">I love AI. I build with it across vision, software, and machine learning, then test it until I know where it breaks.</p>
+    <div class="cta">
+      <button class="btn primary" id="copy" type="button">Copy email</button>
+      <span class="mail">rawadbbd@gmail.com</span>
+      <a class="btn" href="https://github.com/Rabboud906" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/rawad-abboud-5232182b7/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <dl class="facts">
+    <div><dt>Studying</dt><dd>B.S. Computer Science, UCLA<br>Expected June 2028</dd></div>
+    <div><dt>Previously</dt><dd>Santa Barbara City College<br>4.0 GPA, graduated with honors</dd></div>
+    <div><dt>Focus</dt><dd>Artificial intelligence: computer vision, language models, machine learning, and the software around them</dd></div>
+    <div><dt>Looking for</dt><dd>Summer 2027 internships in AI, machine learning, and software engineering, available from June 14, 2027</dd></div>
+    <div><dt>Based in</dt><dd>Los Angeles, CA</dd></div>
+    <div><dt>Club</dt><dd>UCLA ACM AI, building a computer vision team project</dd></div>
+  </dl>
+
+
+  <!-- AI overview -->
+  <section class="row" aria-labelledby="ai">
+    <div class="row-side">
+      <h2 id="ai">What I build</h2>
+      <p class="meta">The kinds of AI work I do</p>
+    </div>
+    <div class="row-main">
+      <div class="tiles">
+        <a class="tile" href="#aircanvas"><b>Computer vision</b><span>Hand tracking and gesture control in AirCanvas, plus defect detection at MathWorks.</span></a>
+        <a class="tile" href="#projects"><b>Language models</b><span>AI Math Tutor uses an LLM to write word problems and walk students through solutions.</span></a>
+        <a class="tile" href="#projects"><b>Multi-model apps</b><span>AI Super Studio puts chat, text-to-image, and PDF question answering in one app.</span></a>
+        <a class="tile" href="#mathworks"><b>Model training</b><span>ResNet-18 transfer learning, tested against lighting, blur, and noise.</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AirCanvas -->
+  <section class="row" aria-labelledby="aircanvas">
+    <div class="row-side">
+      <h2 id="aircanvas">Featured project</h2>
+      <p class="meta">Personal project<br>Oct 2026<br>Python, OpenCV, MediaPipe</p>
+    </div>
+    <div class="row-main">
+      <h3>AirCanvas: draw in the air with your hand</h3>
+      <p>A real-time computer vision app that turns a webcam into a painting surface. It finds your hand, reads which fingers are up, and treats that as a tool: one finger draws, two fingers pick colors and brush size, an open palm erases, and a fist pauses.</p>
+      <p>MediaPipe's Hand Landmarker gives 21 landmarks per frame from a 1280×720 feed. I wrote the gesture classifier myself, using joint angles and fingertip-to-wrist distances, then stabilized it so a single noisy frame cannot flip the tool or scatter stray ink.</p>
+      <p>Strokes are stored as operations and drawn onto a color layer with an alpha mask, then blended over the live video. That is what makes undo, redo, and a pixel-clean eraser possible.</p>
+
+      <figure>
+        <div class="scroll">
+          <svg viewBox="0 0 872 160" role="img" aria-label="Diagram of the AirCanvas pipeline: webcam frame, MediaPipe hand landmarks, gesture classifier, smoothing and debounce, then a stroke layer blended over live video.">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="head"/></marker></defs>
+<rect class="box" x="6" y="38" width="148" height="86"/>
+<text class="t" x="80" y="70" text-anchor="middle">Webcam frame</text>
+<text class="t-sub" x="80" y="90" text-anchor="middle">1280×720</text><text class="t-sub" x="80" y="106" text-anchor="middle">mirrored</text>
+<rect class="box" x="184" y="38" width="148" height="86"/>
+<text class="t" x="258" y="70" text-anchor="middle">Hand landmarks</text>
+<text class="t-sub" x="258" y="90" text-anchor="middle">MediaPipe,</text><text class="t-sub" x="258" y="106" text-anchor="middle">21 points</text>
+<rect class="box" x="362" y="38" width="148" height="86"/>
+<text class="t" x="436" y="70" text-anchor="middle">Gesture classifier</text>
+<text class="t-sub" x="436" y="90" text-anchor="middle">draw, select,</text><text class="t-sub" x="436" y="106" text-anchor="middle">erase, pause</text>
+<rect class="box" x="540" y="38" width="148" height="86"/>
+<text class="t" x="614" y="70" text-anchor="middle">Smooth + debounce</text>
+<text class="t-sub" x="614" y="90" text-anchor="middle">4-frame average,</text><text class="t-sub" x="614" y="106" text-anchor="middle">3-frame hold</text>
+<rect class="box-out" x="718" y="38" width="148" height="86"/>
+<text class="t-out" x="792" y="70" text-anchor="middle">LIVE CANVAS</text>
+<text class="t-sub" x="792" y="90" text-anchor="middle">strokes + mask</text><text class="t-sub" x="792" y="106" text-anchor="middle">over live video</text>
+<path class="arrow" d="M154 81 H182" marker-end="url(#ah)"/>
+<path class="arrow" d="M332 81 H360" marker-end="url(#ah)"/>
+<path class="arrow" d="M510 81 H538" marker-end="url(#ah)"/>
+<path class="arrow" d="M688 81 H716" marker-end="url(#ah)"/>
+<text class="t-note" x="6" y="22">Runs once per video frame</text>
+</svg>
+        </div>
+        <figcaption>How one frame becomes ink, simplified.</figcaption>
+      </figure>
+
+      <dl class="spec">
+        <div><dt>Tools</dt><dd>Python, OpenCV, MediaPipe, NumPy</dd></div>
+        <div><dt>Methods</dt><dd>Hand landmark tracking, geometric gesture classification, temporal smoothing, alpha-mask compositing</dd></div>
+        <div><dt>Controls</dt><dd>Draw, select, erase, pause, undo and redo, brush size from 2 to 40 px, whiteboard mode, PNG export</dd></div>
+        <div><dt>Known limits</dt><dd>Accuracy drops when the hand is partly hidden or leaves the frame, and gesture angles shift with hand orientation</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ACM AI -->
+  <section class="row" aria-labelledby="minecraft">
+    <div class="row-side">
+      <h2 id="minecraft">Team project</h2>
+      <p class="meta">UCLA ACM AI Club<br>Fall 2026</p>
+    </div>
+    <div class="row-main">
+      <p class="tag live">In progress</p>
+      <h3>Any camera, rebuilt in Minecraft</h3>
+      <canvas class="mosaic" id="mosaic" width="640" height="150" role="img" aria-label="Illustration: a smooth scene on the left turns into large square blocks on the right."></canvas>
+      <p>With the ACM AI Club at UCLA, I am part of a team building a computer vision pipeline that takes a live webcam feed, a video, or a still image and shows how that scene would look inside Minecraft.</p>
+      <p>The illustration above is only a sketch of the idea: a smooth picture on the left, blocks on the right. I will add the real pipeline and results here as the project ships.</p>
+    </div>
+  </section>
+
+  <!-- MathWorks -->
+  <section class="row" aria-labelledby="mathworks">
+    <div class="row-side">
+      <h2 id="mathworks">Team project</h2>
+      <p class="meta">MathWorks Workplace Challenge<br>Jul – Aug 2026<br>Remote team project</p>
+    </div>
+    <div class="row-main">
+      <h3>Automated bottle inspection</h3>
+      <p>A virtual inspection station that looks at a bottle image and decides PASS or FAIL. I was Project Manager and Modeling Lead, so I ran the plan and built the model.</p>
+      <p>The system pairs classical image measurements, which show why an image was flagged, with a ResNet-18 classifier fine-tuned through transfer learning. Every inspection returns a decision, a confidence score, the measurements behind it, and an annotated image.</p>
+      <p>Once it worked, we changed the lighting and added blur and noise to see how much each one hurt accuracy. That told us where the system could be trusted and where it could not.</p>
+
+      <figure>
+        <div class="scroll">
+          <svg viewBox="0 0 720 250" role="img" aria-label="Diagram: a bottle image goes through preprocessing, then two parallel paths, classical image measurements and a ResNet-18 classifier, which combine into a PASS or FAIL decision with a confidence score and an annotated image. The input is stress-tested with lighting, blur, and noise changes.">
+            <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="head"/></marker></defs>
+            <rect class="box" x="10" y="95" width="110" height="60"/>
+            <text class="t" x="65" y="121" text-anchor="middle">Bottle</text>
+            <text class="t" x="65" y="139" text-anchor="middle">image</text>
+            <rect class="box" x="150" y="95" width="120" height="60"/>
+            <text class="t" x="210" y="130" text-anchor="middle">Preprocessing</text>
+            <rect class="box" x="310" y="30" width="170" height="64"/>
+            <text class="t" x="395" y="57" text-anchor="middle">Classical image</text>
+            <text class="t" x="395" y="75" text-anchor="middle">measurements</text>
+            <rect class="box" x="310" y="156" width="170" height="64"/>
+            <text class="t" x="395" y="183" text-anchor="middle">ResNet-18 classifier</text>
+            <text class="t" x="395" y="201" text-anchor="middle">transfer learning</text>
+            <rect class="box-out" x="520" y="84" width="190" height="82"/>
+            <text class="t-out" x="615" y="112" text-anchor="middle">PASS OR FAIL</text>
+            <text class="t" x="615" y="134" text-anchor="middle">confidence score</text>
+            <text class="t" x="615" y="152" text-anchor="middle">annotated image</text>
+            <path class="arrow" d="M120 125 H146" marker-end="url(#ah2)"/>
+            <path class="arrow" d="M270 125 H290 V62 H306" marker-end="url(#ah2)"/>
+            <path class="arrow" d="M270 125 H290 V188 H306" marker-end="url(#ah2)"/>
+            <path class="arrow" d="M480 62 H500 V125 H516" marker-end="url(#ah2)"/>
+            <path class="arrow" d="M480 188 H500 V125 H516" marker-end="url(#ah2)"/>
+            <path class="dash" d="M65 158 V178"/>
+            <text class="t-note" x="10" y="196">Stress-tested with changes in</text>
+            <text class="t-note" x="10" y="212">lighting, blur, and noise</text>
+          </svg>
+        </div>
+        <figcaption>How the inspection station works, simplified.</figcaption>
+      </figure>
+
+      <dl class="spec">
+        <div><dt>Role</dt><dd>Project Manager and Modeling Lead</dd></div>
+        <div><dt>Tools</dt><dd>MATLAB, computer vision, machine learning</dd></div>
+        <div><dt>Methods</dt><dd>ResNet-18 transfer learning, classical image processing, data preprocessing, validation</dd></div>
+        <div><dt>Result</dt><dd>92% accuracy on unseen images</dd></div>
+        <div><dt>Tested against</dt><dd>Lighting changes, blur, and noise</dd></div>
+        <div><dt>Outputs</dt><dd>PASS or FAIL decision, confidence score, evidence measurements, annotated inspection images</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Curvature -->
+  <section class="row" aria-labelledby="curvature">
+    <div class="row-side">
+      <h2 id="curvature">Hardware work</h2>
+      <p class="meta">Curvature (Park Place Technologies)<br>Jun – Aug 2026<br>On-site, Santa Barbara, CA</p>
+    </div>
+    <div class="row-main">
+      <h3>Server build verification</h3>
+      <p>As an IT Technician Intern, I built, tested, and quality-checked more than 50 enterprise server and networking systems for Fortune 500 clients. Each one was verified against customer requirements and hardware diagrams before it shipped.</p>
+      <p>Catching configuration errors early improved handoff efficiency by about 15%. I worked with sales and presales engineers to turn customer specifications into working systems, and documented my findings in the ticketing system so the next person could pick up where I left off.</p>
+    </div>
+  </section>
+
+  <!-- More projects -->
+  <section class="row" aria-labelledby="projects">
+    <div class="row-side">
+      <h2 id="projects">AI and software projects</h2>
+      <p class="meta">Code on <a href="https://github.com/Rabboud906" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+    <div class="row-main">
+      <article class="project">
+        <header><h3>AI Math Tutor</h3><p class="meta">Dec 2025 – Feb 2026</p></header>
+        <p class="stack">Python, Flask, Hugging Face, LLM integration, OOP</p>
+        <p>An adaptive math learning platform. AI generates word problems, step-by-step logic engines walk students through solutions, and a progress tracker spots weak areas and recommends practice. Gamification keeps learners engaged.</p>
+      </article>
+      <article class="project">
+        <header><h3>AI Super Studio</h3><p class="meta">Feb – Mar 2026</p></header>
+        <p class="stack">Python, Flask, Hugging Face</p>
+        <p>One Flask app that brings several Hugging Face models together: chat with a language model, image generation from text prompts, and question answering over uploaded PDFs.</p>
+      </article>
+      <article class="project">
+        <header><h3>Arcade System</h3><p class="meta">Sep – Nov 2025</p></header>
+        <p class="stack">C++17, OOP, STL containers, smart pointers, file I/O</p>
+        <p>An arcade management simulator with player registration, token purchases, and machine gameplay. Scores go into a leaderboard that is saved to file between sessions. The code is split across 10+ files and uses inheritance and polymorphism.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Background -->
+  <section class="row" aria-labelledby="background">
+    <div class="row-side">
+      <h2 id="background">Background</h2>
+      <p class="meta">Education, teaching, and recognition</p>
+    </div>
+    <div class="row-main">
+      <div class="cols">
+        <div>
+          <h3>Teaching</h3>
+          <p><strong>Math, Python &amp; Java Tutor</strong>, Santa Barbara City College, January 2024 to present. I help 15+ students each week with programming, data structures, calculus, and linear algebra, mostly by running code reviews and debugging sessions.</p>
+        </div>
+        <div>
+          <h3>Certification</h3>
+          <p>MathWorks Machine Learning Techniques in MATLAB.</p>
+          <h3>Languages</h3>
+          <p>English and Arabic, both fluent.</p>
+        </div>
+        <div>
+          <h3>Recognition</h3>
+          <ul>
+            <li>Towbes/Luria STEM Achievement Scholarship, SBCC Foundation (2026), a $10,000 multi-year award</li>
+            <li>SAFENA Scholarship, Fairouza American Association (2026)</li>
+            <li>President's Honor Roll, Santa Barbara City College, 3 consecutive years</li>
+            <li>Phi Theta Kappa Honor Society, for a sustained 4.0 GPA</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Skills</h3>
+          <ul>
+            <li><strong>Languages:</strong> Python, Java, C++, C, MATLAB, Assembly</li>
+            <li><strong>Computer vision:</strong> OpenCV, MediaPipe, ResNet-18 transfer learning, hand tracking, gesture recognition, real-time video, feature extraction</li>
+            <li><strong>Machine learning:</strong> Model training and validation, data pipelines, NumPy</li>
+            <li><strong>AI apps:</strong> LLM integration, Hugging Face models, text-to-image, document question answering</li>
+            <li><strong>Backend and tools:</strong> Flask, Django, API integration, Hugging Face, Git, GitHub</li>
+            <li><strong>Infrastructure:</strong> Enterprise servers, networking, data center deployment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="contact" aria-labelledby="contact">
+  <div class="wrap">
+    <h2 id="contact" class="contact-big">Building with AI, or hiring for summer 2027? Let's talk.</h2>
+    <div class="contact-links">
+      <span class="mail">rawadbbd@gmail.com</span>
+      <a class="btn" href="https://www.linkedin.com/in/rawad-abboud-5232182b7/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/Rabboud906" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap">Rawad Abboud, Los Angeles, CA</div></footer>
+
+<script>
+  // Copy email button, with a selection fallback when the clipboard is refused.
+  (function () {
+    var btn = document.getElementById("copy");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy email"; }, 1800); };
+      var fail = function () {
+        var m = document.querySelector(".mail");
+        var r = document.createRange(); r.selectNodeContents(m);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = "Press Ctrl/Cmd+C";
+      };
+      try { navigator.clipboard.writeText("rawadbbd@gmail.com").then(done, fail); } catch (e) { fail(); }
+    });
+  })();
+
+  // Mosaic: a smooth scene that turns into blocks from left to right.
+  (function () {
+    var c = document.getElementById("mosaic");
+    if (!c || !c.getContext) return;
+    var W = c.width, H = c.height, ctx = c.getContext("2d");
+    var src = document.createElement("canvas"); src.width = W; src.height = H;
+    var s = src.getContext("2d");
+    var g = s.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#0B1E5B"); g.addColorStop(0.62, "#004D98"); g.addColorStop(0.63, "#A50044"); g.addColorStop(1, "#6E002E");
+    s.fillStyle = g; s.fillRect(0, 0, W, H);
+    s.fillStyle = "#EDBB00"; s.beginPath(); s.arc(W * 0.72, H * 0.36, 30, 0, Math.PI * 2); s.fill();
+    s.fillStyle = "rgba(255,255,255,.9)";
+    for (var i = 0; i < 40; i++) { s.fillRect((i * 97) % W, (i * 53) % (H * 0.55), 2, 2); }
+    s.fillStyle = "#07112F";
+    s.beginPath(); s.moveTo(0, H); s.lineTo(0, H * 0.78); s.lineTo(W * 0.18, H * 0.58); s.lineTo(W * 0.34, H * 0.74); s.lineTo(W * 0.52, H * 0.52); s.lineTo(W * 0.7, H * 0.76); s.lineTo(W, H * 0.62); s.lineTo(W, H); s.fill();
+    ctx.drawImage(src, 0, 0);
+    var tiny = document.createElement("canvas"), t = tiny.getContext("2d");
+    var bands = [[0.34, 4], [0.5, 8], [0.66, 14], [0.83, 22], [1, 30]];
+    var from = 0.34 * W;
+    // Each band after the first third is pixelated with a bigger block size.
+    for (var b = 0; b < bands.length; b++) {
+      var x0 = Math.round(bands[b][0] * W), x1 = b + 1 < bands.length ? Math.round(bands[b + 1][0] * W) : W, size = bands[b][1];
+      if (b + 1 >= bands.length) break;
+      var w = x1 - x0; if (w <= 0) continue;
+      tiny.width = Math.max(1, Math.ceil(w / size)); tiny.height = Math.max(1, Math.ceil(H / size));
+      t.imageSmoothingEnabled = true; t.drawImage(src, x0, 0, w, H, 0, 0, tiny.width, tiny.height);
+      ctx.imageSmoothingEnabled = false; ctx.drawImage(tiny, 0, 0, tiny.width, tiny.height, x0, 0, tiny.width * size, tiny.height * size);
+    }
+  })();
+</script>
+
+</body>
+</html>
